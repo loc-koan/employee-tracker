@@ -74,3 +74,19 @@ function reviewDepartments() {
         runSearch();
     });
 }
+
+function reviewRoles() {
+    connection.query('SELECT * FROM role', function (err, res) {
+        if (err) throw err;
+        console.log(res);
+        runSearch();
+    });
+}
+
+function reviewEmployees() {
+    connection.query('SELECT * FROM employee', function (err, res) {
+        if (err) throw err;
+        console.log(res);
+        runSearch();
+    });
+}
