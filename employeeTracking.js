@@ -1,18 +1,24 @@
 var mysql = require('mysql2');
 var inquirer = require('inquirer');
+var cTable = require('console.table');
+var figlet = require('figlet');
 
 var connection = mysql.createConnection({
     host: 'localhost',
-
-    // Your port; if not 3306
     port: 3306,
-
-    // Your username
     user: 'root',
-
-    // Your password
     password: 'ClassCod3!',
     database: 'reynholm_industries_db',
+});
+
+/* text */
+figlet('Employee Manager', function(err, data) {
+    if (err) {
+        console.log('Something went wrong...');
+        console.dir(err);
+        return;
+    }
+    console.log(data)
 });
 
 connection.connect(function (err) {
@@ -25,27 +31,29 @@ function runSearch() {
         .prompt({
             name: 'action',
             type: 'rawlist',
-            message: 'What would you like to do?',
+            message: 'What would you like to review?',
             choices: [
-                'Find songs by artist',
-                'Find all artists who appear more than once',
-                'Find data within a specific range',
-                'Search for a specific song',
-                'Find artists with a top song and top album in the same year',
+                'Review all departments',
+                'Review all roles',
+                'Review all employees',
+                'Add employee',
+                'Remove employee',
+                'Update Employee Role',
+                'Update Employee Manager',
             ],
         })
         .then(function (answer) {
             switch (answer.action) {
-                case 'Find songs by artist':
-                    artistSearch();
+                case 'Review all departments':
+                    reviewDepartments();
                     break;
 
-                case 'Find all artists who appear more than once':
-                    multiSearch();
+                case 'Review all roles':
+                    reviewRoles();
                     break;
 
-                case 'Find data within a specific range':
-                    rangeSearch();
+                case 'Review all employees':
+                    reviewEmployees();
                     break;
 
                 case 'Search for a specific song':
@@ -57,4 +65,12 @@ function runSearch() {
                     break;
             }
         });
+}
+
+function reviewDepartments() {
+    connection.query('SELECT * FROM department', function (err, res) {
+        if (err) throw err;
+        console.log(res);
+        runSearch();
+    });
 }
