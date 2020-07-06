@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
     database: 'reynholm_industries_db',
 });
 
-/* text */
+/* title */
 figlet('Employee Manager', function(err, data) {
     if (err) {
         console.log('Something went wrong...');
@@ -71,6 +71,7 @@ function reviewDepartments() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
         console.table(res);
+        console.log('----------------------------------------------------'); /* separation line to make reading easier */
         runSearch();
     });
 }
@@ -79,6 +80,7 @@ function reviewRoles() {
     connection.query('SELECT * FROM role', function (err, res) {
         if (err) throw err;
         console.table(res);
+        console.log('----------------------------------------------------');
         runSearch();
     });
 }
@@ -87,6 +89,7 @@ function reviewEmployees() {
     connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
         console.table(res);
+        console.log('----------------------------------------------------');
         runSearch();
     });
 }
