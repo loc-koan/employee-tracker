@@ -70,7 +70,7 @@ function runSearch() {
 function reviewDepartments() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         runSearch();
     });
 }
@@ -78,7 +78,7 @@ function reviewDepartments() {
 function reviewRoles() {
     connection.query('SELECT * FROM role', function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         runSearch();
     });
 }
@@ -86,7 +86,7 @@ function reviewRoles() {
 function reviewEmployees() {
     connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         runSearch();
     });
 }
