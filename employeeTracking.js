@@ -26,6 +26,8 @@ connection.connect(function (err) {
     runSearch();
 });
 
+
+/* pass callback instead */ 
 function runSearch() {
     inquirer
         .prompt({
