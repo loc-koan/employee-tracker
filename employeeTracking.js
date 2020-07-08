@@ -41,6 +41,8 @@ function runSearch() {
                 'Add employee',
                 'Update Employee Role',
                 'Update Employee Manager',
+                'Remove department',
+                'Remove role',
                 'Remove employee',
                 'Exit',
             ],
@@ -71,6 +73,14 @@ function runSearch() {
                     updateEmployeeManager();
                     break;
 
+                case 'Remove department':
+                    removeDepartment();
+                    break;
+                        
+                case 'Remove role':
+                    removeRole();
+                    break;
+                        
                 case 'Remove employee':
                     removeEmployee();
                     break;
@@ -131,6 +141,68 @@ function reviewEmployees() {
 //     });
 // }
 
+function removeDepartment() {
+    connection.query('SELECT * FROM department', function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        console.log('----------------------------------------------------');
+
+        inquirer
+            .prompt([
+                {
+                    name: 'deleteID',
+                    type: 'input',
+                    message: 'What is the ID of the department to be removed?',
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+                            return true;
+                        }
+                        return false;
+                    },
+                }
+            ])
+            .then(function (answer) {
+                var deleteQuery = 'DELETE FROM department WHERE ID = ?';
+                connection.query(deleteQuery, [answer.deleteID], function (err, res) {
+                    console.table(res);
+                    runSearch();
+                });
+            });
+
+    });
+}
+
+function removeRole() {
+    connection.query('SELECT * FROM role', function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        console.log('----------------------------------------------------');
+
+        inquirer
+            .prompt([
+                {
+                    name: 'deleteID',
+                    type: 'input',
+                    message: 'What is the ID of the role to be removed?',
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+                            return true;
+                        }
+                        return false;
+                    },
+                }
+            ])
+            .then(function (answer) {
+                var deleteQuery = 'DELETE FROM role WHERE ID = ?';
+                connection.query(deleteQuery, [answer.deleteID], function (err, res) {
+                    console.table(res);
+                    runSearch();
+                });
+            });
+
+    });
+}
+
 function removeEmployee() {
     connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
@@ -138,13 +210,21 @@ function removeEmployee() {
         console.log('----------------------------------------------------');
 
         inquirer
-            .prompt({
-                name: 'deleteID',
-                type: 'rawlist',
-                message: 'The person that is no longer in our company, what is their ID number?',
-            })
+            .prompt([
+                {
+                    name: 'deleteID',
+                    type: 'input',
+                    message: 'The person that is no longer in our company, what is their ID number?',
+                    validate: function (value) {
+                        if (isNaN(value) === false) {
+                            return true;
+                        }
+                        return false;
+                    },
+                }
+            ])
             .then(function (answer) {
-                var deleteQuery = 'DELETE * FROM employee WHERE ID = ?';
+                var deleteQuery = 'DELETE FROM employee WHERE ID = ?';
                 connection.query(deleteQuery, [answer.deleteID], function (err, res) {
                     console.table(res);
                     runSearch();
