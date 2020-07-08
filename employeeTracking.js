@@ -96,7 +96,7 @@ function runSearch() {
                     break;
 
                 case 'Exit':
-                    connection.end;
+                    connection.end();
                     break;
             }
         });
@@ -152,6 +152,48 @@ function addDepartment() {
             });
 }
 
+function addRole() {
+    console.log('----------------------------------------------------');
+
+    inquirer
+        .prompt([
+            {
+                name: 'newTitle',
+                type: 'input',
+                message: 'What is this new title?',
+            },
+            {
+                name: 'newSalary',
+                type: 'input',
+                message: 'What is their salary?',
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            {
+                name: 'newDeptID',
+                type: 'input',
+                message: 'What will be the department ID?',
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+        ])
+        .then(function (answer) {
+            var addNewRole = 'INSERT INTO role (title, salary, dept_id) VALUES (?,?,?)';
+            connection.query(addNewRole, [answer.newTitle, answer.newSalary, answer.newDeptID], function (err, res) {
+                console.log('\nA new Role has been added\n');
+                runSearch();
+            });
+        });
+}
+
 // function updateEmployeeRole() {
 //     connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
 //         if (err) throw err;
@@ -174,6 +216,8 @@ function addDepartment() {
 //     });
 // }
 
+
+/* remove section */ 
 function removeDepartment() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
