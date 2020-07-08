@@ -133,33 +133,23 @@ function reviewEmployees() {
 
 /* addition section */ 
 function addDepartment() {
-    // connection.query('SELECT * FROM department', function (err, res) {
-    //     if (err) throw err;
-    //     console.table(res);
         console.log('----------------------------------------------------');
 
         inquirer
-        .prompt([
-            {
-                name: 'newDepartment',
-                type: 'input',
-                message: 'What is this departments name?',
-                // validate: function (value) {
-                //     if (isNaN(value) === false) {
-                //         return true;
-                //     }
-                //     return false;
-                // },
-            }
-        ])
-        .then(function (answer) {
-            var addDepartment = `INSERT INTO department (dept_name) VALUES ('?')`;
-            connection.query(addDepartment, [answer.newDepartment], function (err, res) {
-                console.table(res);
+            .prompt([
+                {
+                    name: 'newDepartment',
+                    type: 'input',
+                    message: 'What is this departments name?',
+                }
+            ])
+            .then(function (answer) {
+                var addNewDepartment = 'INSERT INTO department (dept_name) VALUES (?)';
+                connection.query(addNewDepartment, [answer.newDepartment], function (err, res) {
+                    console.log('\nA new department has been added\n');
+                    runSearch();
+                });
             });
-        });
-        runSearch();
-    // });
 }
 
 // function updateEmployeeRole() {
