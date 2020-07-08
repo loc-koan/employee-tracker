@@ -39,9 +39,10 @@ function runSearch() {
                 'Review all roles',
                 'Review all employees',
                 'Add employee',
-                'Remove employee',
                 'Update Employee Role',
                 'Update Employee Manager',
+                'Remove employee',
+                'Exit',
             ],
         })
         .then(function (answer) {
@@ -58,12 +59,24 @@ function runSearch() {
                     reviewEmployees();
                     break;
 
-                case 'Search for a specific song':
-                    songSearch();
+                case 'Add employee':
+                    addEmployee();
                     break;
 
-                case 'Find artists with a top song and top album in the same year':
-                    songAndAlbumSearch();
+                case 'Update Employee Role':
+                    updateEmployeeRole();
+                    break;
+
+                case 'Update Employee Manager':
+                    updateEmployeeManager();
+                    break;
+
+                case 'Remove employee':
+                    removeEmployee();
+                    break;
+
+                case 'Exit':
+                    connection.end;
                     break;
             }
         });
@@ -93,5 +106,13 @@ function reviewEmployees() {
         console.table(res);
         console.log('----------------------------------------------------');
         runSearch();
+    });
+}
+
+function updateEmployeeRole() {
+    connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        runSearch(); /* move this to different section */ 
     });
 }
