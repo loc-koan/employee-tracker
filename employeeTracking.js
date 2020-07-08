@@ -109,10 +109,47 @@ function reviewEmployees() {
     });
 }
 
-function updateEmployeeRole() {
-    connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
+// function updateEmployeeRole() {
+//     connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
+//         if (err) throw err;
+//         console.table(res);
+//         console.log('----------------------------------------------------');
+
+//         // inquirer
+//         //     .prompt({
+//         //         name: 'full_name',
+//         //         type: 'rawlist',
+//         //         message: 'Whose role will be updated?',
+//         //         choices: function () {
+//         //             var selectedEmployee = [];
+//         //             for (var i = 0; i < res.length; i++) {
+//         //                 if (res[i]).full_name
+//         //             }
+//         //         }
+//         //     })
+//         runSearch(); /* move this to different section */ 
+//     });
+// }
+
+function removeEmployee() {
+    connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
         console.table(res);
-        runSearch(); /* move this to different section */ 
+        console.log('----------------------------------------------------');
+
+        inquirer
+            .prompt({
+                name: 'deleteID',
+                type: 'rawlist',
+                message: 'The person that is no longer in our company, what is their ID number?',
+            })
+            .then(function (answer) {
+                var deleteQuery = 'DELETE * FROM employee WHERE ID = ?';
+                connection.query(deleteQuery, [answer.deleteID], function (err, res) {
+                    console.table(res);
+                    runSearch();
+                });
+            });
+
     });
 }
