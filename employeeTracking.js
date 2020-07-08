@@ -38,6 +38,8 @@ function runSearch() {
                 'Review all departments',
                 'Review all roles',
                 'Review all employees',
+                'Add department',
+                'Add role',
                 'Add employee',
                 'Update Employee Role',
                 'Update Employee Manager',
@@ -59,6 +61,14 @@ function runSearch() {
 
                 case 'Review all employees':
                     reviewEmployees();
+                    break;
+
+                case 'Add department':
+                    addDepartment();
+                    break;
+
+                case 'Add role':
+                    addRole();
                     break;
 
                 case 'Add employee':
@@ -92,6 +102,8 @@ function runSearch() {
         });
 }
 
+
+/* review section */ 
 function reviewDepartments() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
@@ -117,6 +129,37 @@ function reviewEmployees() {
         console.log('----------------------------------------------------');
         runSearch();
     });
+}
+
+/* addition section */ 
+function addDepartment() {
+    // connection.query('SELECT * FROM department', function (err, res) {
+    //     if (err) throw err;
+    //     console.table(res);
+        console.log('----------------------------------------------------');
+
+        inquirer
+        .prompt([
+            {
+                name: 'newDepartment',
+                type: 'input',
+                message: 'What is this departments name?',
+                // validate: function (value) {
+                //     if (isNaN(value) === false) {
+                //         return true;
+                //     }
+                //     return false;
+                // },
+            }
+        ])
+        .then(function (answer) {
+            var addDepartment = `INSERT INTO department (dept_name) VALUES ('?')`;
+            connection.query(addDepartment, [answer.newDepartment], function (err, res) {
+                console.table(res);
+            });
+        });
+        runSearch();
+    // });
 }
 
 // function updateEmployeeRole() {
