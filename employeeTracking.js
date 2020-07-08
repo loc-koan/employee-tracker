@@ -194,6 +194,53 @@ function addRole() {
         });
 }
 
+function addEmployee() {
+    console.log('----------------------------------------------------');
+
+    inquirer
+        .prompt([
+            {
+                name: 'newFirstName',
+                type: 'input',
+                message: 'What is their first name?',
+            },
+            {
+                name: 'newLastName',
+                type: 'input',
+                message: 'What is their last name?',
+            },
+            {
+                name: 'newRoleID',
+                type: 'input',
+                message: 'What is their role ID?',
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            {
+                name: 'newManagerID',
+                type: 'input',
+                message: 'What is their manager ID?',
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+        ])
+        .then(function (answer) {
+            var addNewEmployee = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)';
+            connection.query(addNewEmployee, [answer.newFirstName, answer.newLastName, answer.newRoleID, answer.newManagerID], function (err, res) {
+                console.log('\nA new Employee has been added\n');
+                runSearch();
+            });
+        });
+}
+
 // function updateEmployeeRole() {
 //     connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
 //         if (err) throw err;
