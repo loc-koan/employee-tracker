@@ -18,7 +18,7 @@ INSERT INTO role (title, salary, dept_id)
 VALUES 
     ("Manager",50000,1), 
     ("Tech",40000,1), 
-    ("Instructor",100000,2), 
+    ("Development Architect",100000,2), 
     ("Developer",90000,2),
     ("Engineer",70000,3);
 

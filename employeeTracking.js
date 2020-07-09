@@ -108,7 +108,7 @@ function reviewDepartments() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------'); /* separation line to make reading easier */
+        console.log('\n----------------------------------------------------\n'); /* separation line to make reading easier */
         runSearch();
     });
 }
@@ -117,7 +117,7 @@ function reviewRoles() {
     connection.query('SELECT * FROM role', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
         runSearch();
     });
 }
@@ -126,14 +126,14 @@ function reviewEmployees() {
     connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
         runSearch();
     });
 }
 
 /* addition section */ 
 function addDepartment() {
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
 
         inquirer
             .prompt([
@@ -153,7 +153,7 @@ function addDepartment() {
 }
 
 function addRole() {
-    console.log('----------------------------------------------------');
+    console.log('\n----------------------------------------------------\n');
 
     inquirer
         .prompt([
@@ -195,7 +195,7 @@ function addRole() {
 }
 
 function addEmployee() {
-    console.log('----------------------------------------------------');
+    console.log('\n----------------------------------------------------\n');
 
     inquirer
         .prompt([
@@ -241,35 +241,72 @@ function addEmployee() {
         });
 }
 
-// function updateEmployeeRole() {
-//     connection.query('SELECT r.id, r.title, CONCAT(e.first_name, " ", e.last_name) AS full_name FROM role r JOIN employee e ON e.role_id = r.id', function (err, res) {
-//         if (err) throw err;
-//         console.table(res);
-//         console.log('----------------------------------------------------');
+/* update section */ 
+function updateEmployeeRole() {
+    // connection.query(`SELECT e.id, r.title, e.first_name, e.last_name, r.salary
+    //                     FROM department d
+    //                     JOIN role r 
+    //                         ON d.id = r.dept_id
+    //                     JOIN employee e
+    //                         ON e.role_id = r.id`, 
+    //                             function (err, res) {
+    //                                 if (err) throw err;
+    //                             })
+    //     console.table(res);
+        console.log('\nthis function is on the to-do list\n');
+        console.log('\n----------------------------------------------------\n');
+        runSearch();
 
-//         // inquirer
-//         //     .prompt({
-//         //         name: 'full_name',
-//         //         type: 'rawlist',
-//         //         message: 'Whose role will be updated?',
-//         //         choices: function () {
-//         //             var selectedEmployee = [];
-//         //             for (var i = 0; i < res.length; i++) {
-//         //                 if (res[i]).full_name
-//         //             }
-//         //         }
-//         //     })
-//         runSearch(); /* move this to different section */ 
-//     });
-// }
+    //     inquirer
+    //         .prompt([
+    //             {
+    //                 name: 'updateEmployeeRolePerson',
+    //                 type: 'rawlist',
+    //                 message: 'Whose role will be updated?',
+    //                 choices: function () {
+    //                     var selectedEmployee = [];
+    //                     for (var i = 0; i < res.length; i++) {
+    //                         if (res[i].updateEmployeeRoleSelection !== null)
+    //                             selectedEmployee.push(res[i].selectedEmployee);
+    //                     }
+    //                     return selectedEmployee;
+    //                 }
+    //             },
+    //             {
+    //                 name: 'updateEmployeeRoleTitle',
+    //                 type: 'rawlist',
+    //                 message: 'What is their new role / title ?',
+    //                 choices: function () {
+    //                     var selectedTitles = [];
+    //                     for (var i = 0; i < res.length; i++) {
+    //                         if (res[i].updateEmployeeRoleTitle !== null)
+    //                             selectedTitles.push(res[i].selectedTitles);
+    //                     }
+    //                     return selectedTitles;
+    //                 }
+    //             }
+    //         ])
+    //         .then(function (answer) {
+    //             var updateQuery = 'UPDATE FROM role WHERE ID = ?';
+    //             connection.query(updateQuery, [answer.updateEmployeeRolePerson, answer.updateEmployeeRoleTitle], function (err, res) {
+    //                 runSearch();
+    //             });
+    //         });
+    // });
+}
 
+function updateEmployeeManager() {
+    console.log('\nthis function is on the to-do list\n');
+    console.log('\n----------------------------------------------------\n');
+    runSearch();
+}
 
 /* remove section */ 
 function removeDepartment() {
     connection.query('SELECT * FROM department', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
 
         inquirer
             .prompt([
@@ -300,7 +337,7 @@ function removeRole() {
     connection.query('SELECT * FROM role', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
 
         inquirer
             .prompt([
@@ -331,7 +368,7 @@ function removeEmployee() {
     connection.query('SELECT * FROM employee', function (err, res) {
         if (err) throw err;
         console.table(res);
-        console.log('----------------------------------------------------');
+        console.log('\n----------------------------------------------------\n');
 
         inquirer
             .prompt([

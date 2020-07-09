@@ -6,7 +6,7 @@ This application was created with non-developers in mind.  It simplifies the use
 
 ## Links:
 
-- [Screencastify](https://drive.google.com/file/d/1-u7C0V6lDy4HdxEnqEqAfZn-5CSXkfCw/view)
+- [Screencastify](https://drive.google.com/file/d/1Ix3jamtUII0ee6NZ0dRFql2EhRmc7SK7/view)
 - [GitHub](https://loc-koan.github.io/employee-tracker/)
 
 ## Installation
@@ -14,7 +14,7 @@ This application was created with non-developers in mind.  It simplifies the use
 - Clone the repository at [GitHub](https://loc-koan.github.io/employee-tracker/) to view its code
 - Run the schema.sql file to create the database and its tables
 - Run the seed.sql file to store initial values
-- Walkthrough video demonstrating the functionality of the application is in [Screencastify](https://drive.google.com/file/d/1-u7C0V6lDy4HdxEnqEqAfZn-5CSXkfCw/view)
+- Walkthrough video demonstrating the functionality of the application is in [Screencastify](https://drive.google.com/file/d/1Ix3jamtUII0ee6NZ0dRFql2EhRmc7SK7/view)
 
 ## Credits
 - [MDN](https://developer.mozilla.org/en-US/docs/Web/Tutorials)
